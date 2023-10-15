@@ -102,9 +102,9 @@ class ProductViral extends StatelessWidget {
                     const SizedBox(
                       width: 11,
                     ),
-                    Text(
-                      '',
-                      style: const TextStyle(
+                    const Text(
+                      '220g',
+                      style: TextStyle(
                         fontWeight: FontWeight.w600,
                         color: Colors.black,
                         fontSize: 7,
