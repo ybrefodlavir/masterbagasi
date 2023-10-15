@@ -1,12 +1,14 @@
 // ignore_for_file: file_names, must_be_immutable
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:masterbagasi/Pages/JelajahPage.dart';
 import 'package:masterbagasi/Pages/MenuPage.dart';
 import 'package:masterbagasi/Pages/SuguhanPage.dart';
 import 'package:masterbagasi/Pages/WishlistPage.dart';
 import 'package:masterbagasi/Pages/widgets/ProductTerlaris.dart';
 import 'package:masterbagasi/Pages/widgets/ProductViral.dart';
+import 'package:masterbagasi/data/controller/product_controller.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -16,6 +18,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // Product Controller
+  final ProductController productController = Get.put(ProductController());
+
   List bottomNavigationBarWidget = [
     HomePage(),
     const SuguhanPage(),
@@ -126,39 +131,42 @@ class _HomePageState extends State<HomePage> {
                       Radius.circular(5),
                     ),
                   ),
-                  child: const Row(
+                  child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.search,
                         color: Color(0xffD1D3D9),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 14,
                       ),
                       SizedBox(
                         width: 176,
                         child: Text(
                           "Cari di Masterbagasi",
+                          style: TextStyle(
+                            color: const Color(0xff2C2C2C).withOpacity(0.4),
+                          ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 14,
                       ),
-                      Icon(
+                      const Icon(
                         EvaIcons.bellOutline,
                         color: Color(0xffD1D3D9),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 14,
                       ),
-                      Icon(
+                      const Icon(
                         EvaIcons.emailOutline,
                         color: Color(0xffD1D3D9),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 14,
                       ),
-                      Icon(
+                      const Icon(
                         EvaIcons.shoppingCartOutline,
                         color: Color(0xffD1D3D9),
                       ),
@@ -488,49 +496,33 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 14,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 14),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      ProductViral(
-                        photo: 'assets/images/png/viral1.png',
-                        nama: 'Makaroni Ngehe Pedas Asin',
-                        harga: 'Rp28.600',
-                        berat: '250g',
-                      ),
-                      SizedBox(
-                        width: 6,
-                      ),
-                      ProductViral(
-                        photo: 'assets/images/png/viral2.png',
-                        nama: 'Baso Aci Bapper Tulang Rangu 3 pcs',
-                        harga: 'Rp97.900',
-                        berat: '660g',
-                      ),
-                      SizedBox(
-                        width: 6,
-                      ),
-                      ProductViral(
-                        photo: 'assets/images/png/viral3.png',
-                        nama: 'Mr Crispy Sambal Teri Medan',
-                        harga: 'Rp57.200',
-                        berat: '200g',
-                      ),
-                      SizedBox(
-                        width: 6,
-                      ),
-                      ProductViral(
-                        photo: 'assets/images/png/viral1.png',
-                        nama: 'Makaroni Ngehe Pedas Asin',
-                        harga: 'Rp28.600',
-                        berat: '250g',
-                      ),
-                      SizedBox(
-                        width: 6,
-                      ),
-                    ],
+                  child: Obx(
+                    () {
+                      if (productController.isLoading.value) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (productController.error.value.isNotEmpty) {
+                        return Center(
+                          child: Text(productController.error.value),
+                        );
+                      } else {
+                        return Row(
+                          children: productController.product.map((data) {
+                            return ProductViral(
+                              photo: data.image!,
+                              nama: data.title!,
+                              harga: data.price.toString(),
+                              berat: '200g',
+                            );
+                          }).toList(),
+                        );
+                      }
+                    },
                   ),
                 ),
               ),

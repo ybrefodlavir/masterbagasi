@@ -9,18 +9,19 @@ class ProductViral extends StatelessWidget {
     required this.photo,
     required this.nama,
     required this.harga,
-    required this.berat,
+    this.berat,
   }) : super(key: key);
 
   final String photo;
   final String nama;
   final String harga;
-  final String berat;
+  final String? berat;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 116,
+      margin: const EdgeInsets.only(right: 10),
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(
@@ -57,11 +58,12 @@ class ProductViral extends StatelessWidget {
               ),
             ),
           ),
-          Image.asset(
-            photo,
-            width: 116,
-            height: 116,
-          ),
+          // Image.asset(
+          //   photo,
+          //   width: 116,
+          //   height: 116,
+          // ),
+          Image.network(photo, width: 116, height: 116),
           Container(
             margin: const EdgeInsets.only(left: 4, bottom: 10),
             child: Text(
@@ -69,6 +71,8 @@ class ProductViral extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 10,
               ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           Padding(
@@ -99,7 +103,7 @@ class ProductViral extends StatelessWidget {
                       width: 11,
                     ),
                     Text(
-                      berat,
+                      '',
                       style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         color: Colors.black,
