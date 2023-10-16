@@ -9,13 +9,13 @@ class ProductViral extends StatelessWidget {
     required this.photo,
     required this.nama,
     required this.harga,
-    this.berat,
+    required this.berat,
   }) : super(key: key);
 
   final String photo;
   final String nama;
   final String harga;
-  final String? berat;
+  final String berat;
 
   @override
   Widget build(BuildContext context) {
@@ -102,9 +102,9 @@ class ProductViral extends StatelessWidget {
                     const SizedBox(
                       width: 11,
                     ),
-                    const Text(
-                      '220g',
-                      style: TextStyle(
+                    Text(
+                      berat,
+                      style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         color: Colors.black,
                         fontSize: 7,

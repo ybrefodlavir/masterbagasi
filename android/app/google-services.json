@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1010634727730",
+    "project_id": "notification-pusher-27270",
+    "storage_bucket": "notification-pusher-27270.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010634727730:android:f5408ed3722edf5ae8772b",
+        "android_client_info": {
+          "package_name": "com.example.masterbagasi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFMgpENYjleHimIgCLSSMuyNlW6GF1QdA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
